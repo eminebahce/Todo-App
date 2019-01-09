@@ -15,13 +15,13 @@
 <body>
     <div class="container">
         <h3>ADD ITEM</h3>
-        <form>
+        <form onsubmit="submitTodo(); return false">
             <div class="row">
                 <div class="col-md-8 col">
                     <input id="textInput" class="form-control" type="text" placeholder="What do you want to do today?">
                 </div>
                 <div class="col-md-4 col">
-                    <button class="btn" type="button">Add</button>
+                    <button class="btn" type="button" onclick="submitTodo(); return false">Add</button>
                 </div>
             </div>
         </form>
@@ -29,20 +29,21 @@
         <div id="todoList">
             <ul class="" id="todolist">
                 <li class="todo">
-                    <input type="checkbox" id="todo-1">
+                    <input type="checkbox" id="todo-1" onchange="toggleDone().bind(this)();">
                     <label for="todo-1">First todo</label>
                     <input type="text" id="editBtn">
                     <button class="edit">Edit</button>
-                    <button class="delete">Delete</button>
+                    <button class="delete" onclick="deleteBtn(); return false">Delete</button>
                 </li>
                 <li class="todo-completed">
-                    <input type="checkbox" id="todo-2" checked>
+                    <input type="checkbox" id="todo-2" checked onchange="toggleDone().bind(this)();">
                     <label for="todo-2">Second todo but completed</label>
                 </li>
             </ul>
         </div>
         <div class="footer col-md-8">
             Todo: <span id="todo-count">2</span> Done: <span id="done-count">1</span> Total: <span id="total-count">3</span>
+            <a href="#" onclick="cleanUpAllTodos(); return false">Clean up</a>
         </div>
     </div>
 
