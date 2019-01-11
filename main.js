@@ -4,12 +4,15 @@ function submitTodo() {
     createNewTodo(inputField);
 
     // reset the input value
-    inputField = null;
+    $(document).ready(function() {
+        $('#textInput').val('');
+    });
 }
 
 function createNewTodo(inputField) {
     let listItem = document.createElement('li');
     listItem.className = 'todo';
+    listItem.id = 'firstID';
 
     let checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -25,6 +28,16 @@ function createNewTodo(inputField) {
     label.innerHTML = inputField;
     listItem.appendChild(label);
 
+    let buttonDelete = document.createElement('button');
+    buttonDelete.innerHTML = 'Delete';
+    // buttonDelete.onclick = "deleteBtn(); return false"
+    buttonDelete.addEventListener("click", deleteBtn)
+    listItem.appendChild(buttonDelete);
+
+    let buttonEdit = document.createElement('button');
+    buttonEdit.innerHTML = 'Edit';
+    listItem.appendChild(buttonEdit);
+
     let list = document.getElementById('todolist');
     list.appendChild(listItem);
 
@@ -37,8 +50,9 @@ function nextTodoId() {
 
 function toggleDone() {
     let checkbox = this;
+    console.log(checkbox);
 
-    if (checkbox.checked) {
+    if (checkbox.value) {
         checkbox.parentElement.className = "todo-completed";
     } else {
         checkbox.parentElement.className = "todo";
@@ -67,15 +81,37 @@ function cleanUpAllTodos() {
     list.innerHTML = '';
 }
 
-function deleteBtn() {
-    /** let node = document.getElementById('todolist');
-    let child = document.getElementById('todo');
-    let throwawayNode = node.removeChild(child);
-    */
+function deleteBtn(event) {
+    //console.log(event)
+    /** 
+        let parent = document.getElementsByClassName('parentTodo')
+        let child = document.getElementsByClassName('todo');
+        parent.removeChild(child);
+    
+        let child = document.getElementById('firstID');
+        child.innerHTML = '';
+         */
+    let catched = document.getElementById('secondID');
+    let secondCatched = document.getElementById('firstID');
 
-    let element = document.getElementById("todolist");
-    while (element.firstChild) {
-        element.removeChild(element.firstChild);
+    if (catched) {
+        let parent = document.getElementById('todolist');
+        let child = document.getElementById('secondID');
+        parent.removeChild(child);
+    } else if (secondCatched) {
+        let parent = document.getElementById('todolist')
+        let child = document.getElementById('firstID');
+        parent.removeChild(child);
+
     }
+
+
+
+    /**
+     * if (event.target.parentNode) {
+            event.target.parentNode.removeChild(node);
+        }
+     */
+
 
 }
